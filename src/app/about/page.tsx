@@ -30,7 +30,7 @@ export default function AboutPage() {
               Founded on the principles of trust, excellence, and innovation, DealRite Realty Limited has grown to become a leading name in the property sector. We don't just build houses; we curate lifestyles.
             </p>
             <p className="text-slate-600 leading-relaxed mb-8">
-              Our projects, like Dariann Court, are a testament to our commitment to quality. From smart home integrations to unparalleled security systems, we ensure our clients get the best value for their investments.
+              Our projects, like Coastal Residence and DealRite OwnFarm, are a testament to our commitment to quality. From smart home integrations to unparalleled security systems, we ensure our clients get the best value for their investments.
             </p>
             
             <ul className="space-y-4">

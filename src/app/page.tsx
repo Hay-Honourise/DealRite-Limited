@@ -8,20 +8,22 @@ export default function HomePage() {
       {/* Hero Section */}
       <section className="relative h-screen flex items-center justify-center pt-20 overflow-hidden">
         <div className="absolute inset-0 bg-slate-900">
-          <Image 
-            src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80" 
-            alt="Premium Estate" 
-            fill 
-            className="object-cover opacity-50"
-            priority
-          />
+          <video 
+            autoPlay 
+            loop 
+            muted 
+            playsInline 
+            className="w-full h-full object-cover opacity-50"
+          >
+            <source src="/DealRite-homepage-video.mp4" type="video/mp4" />
+          </video>
         </div>
         <div className="relative z-10 container mx-auto px-4 md:px-8 text-center text-white">
           <h1 className="text-5xl md:text-7xl font-extrabold mb-6 tracking-tight">
-            Find Your Dream <span className="text-orange-500">Home</span> Today
+            The Path to Finding a <span className="text-orange-500">Luxurious</span> Lifestyle
           </h1>
           <p className="text-lg md:text-2xl text-slate-200 mb-10 max-w-2xl mx-auto">
-            Experience premium, secure, and smart living spaces designed for comfort and everyday life.
+            ... Your Right Investment Deal
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/projects" className="bg-orange-600 text-white px-8 py-4 rounded-full font-semibold hover:bg-orange-700 transition flex items-center justify-center gap-2">
@@ -34,56 +36,104 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Featured Property: Dariann Court Details */}
+      {/* Featured Ongoing Projects */}
       <section className="py-24 bg-slate-50">
         <div className="container mx-auto px-4 md:px-8">
-          <div className="flex flex-col lg:flex-row gap-16 items-center">
-            <div className="lg:w-1/2 relative h-[500px] w-full rounded-2xl overflow-hidden shadow-2xl">
-              <Image 
-                src="https://images.unsplash.com/photo-1600607687931-cecebd803622?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
-                alt="Dariann Court"
-                fill
-                className="object-cover"
-              />
-              <div className="absolute top-4 left-4 bg-orange-600 text-white px-4 py-1 rounded-full text-sm font-semibold">
-                Now Selling
+          <div className="text-center mb-16 max-w-2xl mx-auto">
+            <h2 className="text-4xl font-bold text-slate-900 mb-4">Our Ongoing Projects</h2>
+            <p className="text-lg text-slate-600">Discover our latest developments designed to bring you high returns and premium living experiences.</p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            {/* OwnFarm Estate */}
+            <div className="bg-white rounded-3xl overflow-hidden shadow-xl group flex flex-col">
+              <div className="relative w-full overflow-hidden shrink-0 bg-white border-b border-slate-100">
+                <Image 
+                  src="/ownfarm.jpeg"
+                  alt="DealRite OwnFarm"
+                  width={800}
+                  height={1000}
+                  className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute top-4 left-4 bg-orange-600 text-white px-4 py-1 rounded-full text-sm font-semibold shadow-md">
+                  Estate Allocation
+                </div>
+              </div>
+              <div className="p-8 flex flex-col flex-grow">
+                <h3 className="text-3xl font-bold text-slate-900 mb-4">DealRite OwnFarm</h3>
+                <p className="text-slate-600 mb-6 leading-relaxed flex-grow">
+                  Join the lucrative agricultural real estate sector. Purchase your farm plots and let us handle the farming to generate a solid ROI for you.
+                </p>
+                <div className="space-y-4 mb-8">
+                  <div className="flex items-start gap-3">
+                    <MapPin className="w-5 h-5 text-orange-600 shrink-0 mt-0.5" />
+                    <div>
+                      <h4 className="font-semibold text-slate-900">Location</h4>
+                      <p className="text-sm text-slate-600">Fiditi, Ibadan - Oyo Rd, Oyo State.</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <Search className="w-5 h-5 text-orange-600 shrink-0 mt-0.5" />
+                    <div>
+                      <h4 className="font-semibold text-slate-900">Meet Location & Time</h4>
+                      <p className="text-sm text-slate-600">Kilimanjaro, Ojoo, Ibadan<br/>Saturday, April 25th 2026 | 9AM PROMPT</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="flex flex-col xl:flex-row gap-3 mt-auto">
+                  <Link href="https://surveyheart.com/form/69e462b8001e39939dc2b237" className="flex-1 text-center bg-slate-900 text-white px-4 py-3 rounded-xl font-medium hover:bg-slate-800 transition whitespace-nowrap">
+                    Book Inspection
+                  </Link>
+                  <Link href="/faqs" className="flex-1 text-center bg-orange-100 text-orange-600 px-4 py-3 rounded-xl font-medium hover:bg-orange-200 transition">
+                    FAQs
+                  </Link>
+                </div>
               </div>
             </div>
-            <div className="lg:w-1/2">
-              <h2 className="text-4xl font-bold text-slate-900 mb-4">Dariann Court</h2>
-              <p className="text-lg text-slate-600 mb-8 leading-relaxed">
-                At Dariann Court, life is easy and convenient. Smart home features, reliable security, and a great location mean you're always connected to what matters. With spacious 4-bedroom duplexes, this estate is designed for comfort and everyday living.
-              </p>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                <div className="flex items-start gap-4">
-                  <div className="bg-orange-100 p-3 rounded-xl text-orange-600">
-                    <MapPin className="w-6 h-6" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-slate-900">Location</h4>
-                    <p className="text-sm text-slate-600">Olive Park Estate, Lekki-Epe Express</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-4">
-                  <div className="bg-orange-100 p-3 rounded-xl text-orange-600">
-                    <Home className="w-6 h-6" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-slate-900">Property Types</h4>
-                    <p className="text-sm text-slate-600">4-Bed Detached Duplex + BQ</p>
-                  </div>
+
+            {/* Coastal Residence */}
+            <div className="bg-white rounded-3xl overflow-hidden shadow-xl group flex flex-col">
+              <div className="relative w-full overflow-hidden shrink-0 bg-white border-b border-slate-100">
+                <Image 
+                  src="/coastal.jpeg"
+                  alt="Coastal Residence"
+                  width={800}
+                  height={1000}
+                  className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute top-4 left-4 bg-orange-600 text-white px-4 py-1 rounded-full text-sm font-semibold shadow-md">
+                  Official Launching
                 </div>
               </div>
-
-              <div className="flex items-center justify-between border-t border-slate-200 pt-8">
-                <div>
-                  <p className="text-sm text-slate-500 font-medium uppercase tracking-wider mb-1">Starting From</p>
-                  <p className="text-3xl font-bold text-orange-600">₦160M</p>
+              <div className="p-8 flex flex-col flex-grow">
+                <h3 className="text-3xl font-bold text-slate-900 mb-4">Coastal Residence</h3>
+                <p className="text-slate-600 mb-6 leading-relaxed flex-grow">
+                  A premium residential project offering luxurious living. Designed for those who appreciate comfort, modern architecture, and a serene environment.
+                </p>
+                <div className="space-y-4 mb-8">
+                  <div className="flex items-start gap-3">
+                    <MapPin className="w-5 h-5 text-orange-600 shrink-0 mt-0.5" />
+                    <div>
+                      <h4 className="font-semibold text-slate-900">Location</h4>
+                      <p className="text-sm text-slate-600">Ajobo, Moniya, Ibadan.</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <Home className="w-5 h-5 text-orange-600 shrink-0 mt-0.5" />
+                    <div>
+                      <h4 className="font-semibold text-slate-900">Property Types</h4>
+                      <p className="text-sm text-slate-600">Premium Modern Residential Homes</p>
+                    </div>
+                  </div>
                 </div>
-                <Link href="/contact" className="bg-slate-900 text-white px-6 py-3 rounded-xl font-medium hover:bg-slate-800 transition">
-                  Book Inspection
-                </Link>
+                <div className="flex flex-col xl:flex-row gap-3 mt-auto">
+                  <Link href="https://surveyheart.com/form/69e462b8001e39939dc2b237" className="flex-1 text-center bg-slate-900 text-white px-4 py-3 rounded-xl font-medium hover:bg-slate-800 transition whitespace-nowrap">
+                    Book Inspection
+                  </Link>
+                  <Link href="/faqs" className="flex-1 text-center bg-orange-100 text-orange-600 px-4 py-3 rounded-xl font-medium hover:bg-orange-200 transition">
+                    FAQs
+                  </Link>
+                </div>
               </div>
             </div>
           </div>

@@ -10,6 +10,17 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  
+  /* DealRite Brand Colors */
+  --color-orange-50: #fff4ed;
+  --color-orange-100: #ffe5d4;
+  --color-orange-400: #FFBF00;
+  --color-orange-500: #F9A602;
+  --color-orange-600: #FC6600;
+  --color-orange-700: #e05a00;
+  
+  --color-slate-900: #000000;
+  --color-slate-800: #1a1a1a;
 }
 
 @media (prefers-color-scheme: dark) {

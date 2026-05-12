@@ -5,8 +5,8 @@ const prisma = new PrismaClient()
 async function main() {
   const defaultProperty = await prisma.property.create({
     data: {
-      title: 'Dariann Court',
-      description: 'At Dariann Court, life is easy and convenient. Smart home features, reliable security, and a great location mean you are always connected to what matters. With spacious 4-bedroom duplexes, this estate is designed for comfort and everyday living. Whether you are looking for a home or an investment, Dariann Court offers a secure, well-placed space where you can truly settle in and enjoy life.',
+      title: 'Coastal Residence',
+      description: 'At Coastal Residence, life is easy and convenient. Smart home features, reliable security, and a great location mean you are always connected to what matters. Designed for comfort and everyday living. Whether you are looking for a home or an investment, Coastal Residence offers a secure, well-placed space where you can truly settle in and enjoy life.',
       location: 'Olive Park Estate, Opposite LandWey Office, after Lagos Business School, Off Lekki-Epe Expressway, Lagos.',
       price: 'Starting from ₦160M',
       status: 'Ongoing',

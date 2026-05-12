@@ -59,7 +59,7 @@ export default function ContactPage() {
                   <Phone className="w-6 h-6 text-orange-200 shrink-0" />
                   <div>
                     <h4 className="font-medium text-white">Phone</h4>
-                    <p className="text-orange-100 mt-1">+234 800 DEALRITE</p>
+                    <p className="text-orange-100 mt-1">+234 8028998975</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
@@ -73,7 +73,7 @@ export default function ContactPage() {
                   <MapPin className="w-6 h-6 text-orange-200 shrink-0" />
                   <div>
                     <h4 className="font-medium text-white">Head Office</h4>
-                    <p className="text-orange-100 mt-1">Olive Park Estate, Opposite LandWey Office, after Lagos Business School, Lagos.</p>
+                    <p className="text-orange-100 mt-1">Road 1, No 5, Alhaja Junction, Onigimejila, IITA/Ojoo, Ibadan, Oyo State, Nigeria.</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
@@ -115,7 +115,7 @@ export default function ContactPage() {
                     value={formData.name}
                     onChange={handleChange}
                     className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-orange-600 focus:border-transparent transition"
-                    placeholder="John Doe"
+                    placeholder="david Macauley"
                   />
                 </div>
                 <div>
@@ -143,7 +143,7 @@ export default function ContactPage() {
                   value={formData.email}
                   onChange={handleChange}
                   className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-orange-600 focus:border-transparent transition"
-                  placeholder="john@example.com"
+                  placeholder="david@example.com"
                 />
               </div>
 
@@ -156,17 +156,27 @@ export default function ContactPage() {
                   value={formData.message}
                   onChange={handleChange}
                   className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-orange-600 focus:border-transparent transition"
-                  placeholder="I would like to schedule an inspection for Dariann Court..."
+                  placeholder="I would like to schedule an inspection for Coastal Residence..."
                 />
               </div>
 
-              <button
-                type="submit"
-                disabled={status === 'submitting'}
-                className="w-full bg-orange-600 text-white py-4 rounded-xl font-semibold hover:bg-orange-700 transition disabled:opacity-70 disabled:cursor-not-allowed"
-              >
-                {status === 'submitting' ? 'Submitting...' : 'Book Inspection'}
-              </button>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <button
+                  type="submit"
+                  disabled={status === 'submitting'}
+                  className="flex-1 bg-slate-900 text-white py-4 rounded-xl font-semibold hover:bg-slate-800 transition disabled:opacity-70 disabled:cursor-not-allowed"
+                >
+                  {status === 'submitting' ? 'Sending...' : 'Send Message'}
+                </button>
+                <a
+                  href="https://surveyheart.com/form/69e462b8001e39939dc2b237"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 text-center flex items-center justify-center bg-orange-600 text-white py-4 rounded-xl font-semibold hover:bg-orange-700 transition"
+                >
+                  Book Inspection Instead
+                </a>
+              </div>
             </form>
           </div>
         </div>
