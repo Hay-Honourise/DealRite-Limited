@@ -31,7 +31,7 @@ export default function Navbar() {
   return (
     <header
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        scrolled ? 'bg-white/80 backdrop-blur-md shadow-sm py-3' : 'bg-transparent py-5'
+        scrolled ? 'bg-white/95 backdrop-blur-md shadow-md py-3' : 'bg-white/80 backdrop-blur-md shadow-sm py-5'
       }`}
     >
       <div className="container mx-auto px-4 md:px-8 flex justify-between items-center">
@@ -58,7 +58,7 @@ export default function Navbar() {
                 className={`text-sm font-medium transition-all duration-300 relative py-2 ${
                   isActive 
                     ? 'text-orange-600' 
-                    : scrolled ? 'text-slate-600 hover:text-orange-600' : 'text-slate-800 hover:text-orange-600'
+                    : 'text-slate-700 hover:text-orange-600'
                 }`}
               >
                 {link.name}
