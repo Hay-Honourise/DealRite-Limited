@@ -1,15 +1,29 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { MapPin, Mail, Phone, Globe, Send } from 'lucide-react'
+import { MapPin, Mail, Phone } from 'lucide-react'
 
 const Facebook = ({ className }: { className?: string }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
 )
-const Twitter = ({ className }: { className?: string }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
+const Instagram = ({ className }: { className?: string }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
+    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+    <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
+  </svg>
+)
+const TwitterX = ({ className }: { className?: string }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" className={className}>
+    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+  </svg>
 )
 const Linkedin = ({ className }: { className?: string }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+)
+const Tiktok = ({ className }: { className?: string }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" />
+  </svg>
 )
 const Youtube = ({ className }: { className?: string }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M2.5 7.1c0 0-1.5 5.5.5 11.2C3.7 19.5 5.2 20 12 20s8.3-.5 9-1.7c2-5.7.5-11.2.5-11.2C20.8 6 19.3 5.5 12 5.5S3.2 6 2.5 7.1z"/><path d="m10 15 5-3-5-3v6z"/></svg>
@@ -34,21 +48,24 @@ export default function Footer() {
             <p className="text-sm text-slate-400 mb-6 leading-relaxed">
               We provide premium, secure, and modern living spaces designed for comfort and everyday living. Find your dream home or next investment with us.
             </p>
-            <div className="flex gap-4">
-              <a href="#" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-orange-600 transition-colors text-white">
-                <Twitter className="w-5 h-5" />
-              </a>
+            <div className="flex flex-wrap gap-3">
               <a href="#" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-orange-600 transition-colors text-white">
                 <Facebook className="w-5 h-5" />
+              </a>
+              <a href="#" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-orange-600 transition-colors text-white">
+                <Instagram className="w-5 h-5" />
+              </a>
+              <a href="#" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-orange-600 transition-colors text-white">
+                <TwitterX className="w-5 h-5" />
               </a>
               <a href="#" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-orange-600 transition-colors text-white">
                 <Linkedin className="w-5 h-5" />
               </a>
               <a href="#" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-orange-600 transition-colors text-white">
-                <Youtube className="w-5 h-5" />
+                <Tiktok className="w-5 h-5" />
               </a>
               <a href="#" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-orange-600 transition-colors text-white">
-                <Send className="w-4 h-4 ml-[-2px]" />
+                <Youtube className="w-5 h-5" />
               </a>
             </div>
           </div>
@@ -59,9 +76,19 @@ export default function Footer() {
             <ul className="space-y-3 text-sm">
               <li><Link href="/" className="hover:text-orange-500 transition-colors">Home</Link></li>
               <li><Link href="/about" className="hover:text-orange-500 transition-colors">About Us</Link></li>
-              <li><Link href="/projects" className="hover:text-orange-500 transition-colors">Our Projects</Link></li>
+              <li><Link href="/blog" className="hover:text-orange-500 transition-colors">Blog</Link></li>
+              <li><Link href="/faqs" className="hover:text-orange-500 transition-colors">FAQs</Link></li>
               <li><Link href="/contact" className="hover:text-orange-500 transition-colors">Contact Us</Link></li>
-              <li><Link href="https://surveyheart.com/form/69e462b8001e39939dc2b237" className="hover:text-orange-500 transition-colors">Book Inspection</Link></li>
+              <li>
+                <a 
+                  href="https://chat.whatsapp.com/JWVirRoM0SeLbEmOZaY5Qy?s=sh&p=i&mlu=2" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="hover:text-orange-500 transition-colors"
+                >
+                  Join DealRite Limited
+                </a>
+              </li>
             </ul>
           </div>
 
@@ -69,10 +96,18 @@ export default function Footer() {
           <div>
             <h3 className="text-white font-semibold mb-6">Projects</h3>
             <ul className="space-y-3 text-sm">
-              <li><Link href="/projects?filter=ongoing" className="hover:text-orange-500 transition-colors">Ongoing Projects</Link></li>
-              <li><Link href="/projects?filter=upcoming" className="hover:text-orange-500 transition-colors">Upcoming Projects</Link></li>
-              <li><Link href="/projects?filter=completed" className="hover:text-orange-500 transition-colors">Completed Projects</Link></li>
-              <li><Link href="/projects" className="hover:text-orange-500 transition-colors">DealRite Realty</Link></li>
+              <li><Link href="/projects?status=selling" className="hover:text-orange-500 transition-colors">Currently Selling</Link></li>
+              <li><Link href="/projects?status=sold" className="hover:text-orange-500 transition-colors">Sold Out</Link></li>
+              <li>
+                <a 
+                  href="https://surveyheart.com/form/69e462b8001e39939dc2b237" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="hover:text-orange-500 transition-colors"
+                >
+                  Book Inspection
+                </a>
+              </li>
             </ul>
           </div>
 
@@ -86,11 +121,11 @@ export default function Footer() {
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="w-5 h-5 text-orange-500 shrink-0" />
-                <span>+234 8028998975 DEALRITE</span>
+                <span>+234 811 019 1956 / +234 902 002 3672</span>
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="w-5 h-5 text-orange-500 shrink-0" />
-                <span>info@dealriterealty.com</span>
+                <span>dealriterealtyoperations@gmail.com</span>
               </li>
             </ul>
           </div>
@@ -98,6 +133,17 @@ export default function Footer() {
 
         <div className="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-slate-500">
           <p>&copy; {new Date().getFullYear()} DealRite Realty Limited. All rights reserved.</p>
+          <p>
+            Designed by:{' '}
+            <a 
+              href="https://hay-honourise.github.io/Abdulrazaq/" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="hover:text-orange-500 text-slate-400 font-medium transition-colors"
+            >
+              Hay-Honourise
+            </a>
+          </p>
           <div className="flex gap-4">
             <Link href="#" className="hover:text-white transition-colors">Privacy Policy</Link>
             <Link href="#" className="hover:text-white transition-colors">Terms of Service</Link>

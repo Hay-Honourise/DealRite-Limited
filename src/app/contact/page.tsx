@@ -59,14 +59,14 @@ export default function ContactPage() {
                   <Phone className="w-6 h-6 text-orange-200 shrink-0" />
                   <div>
                     <h4 className="font-medium text-white">Phone</h4>
-                    <p className="text-orange-100 mt-1">+234 8028998975</p>
+                    <p className="text-orange-100 mt-1">+234 811 019 1956 or +234 902 002 3672</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
                   <Mail className="w-6 h-6 text-orange-200 shrink-0" />
                   <div>
                     <h4 className="font-medium text-white">Email</h4>
-                    <p className="text-orange-100 mt-1">info@dealriterealty.com</p>
+                    <p className="text-orange-100 mt-1">dealriterealtyoperations@gmail.com</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">

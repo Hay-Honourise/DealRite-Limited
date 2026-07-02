@@ -25,19 +25,19 @@ const contacts: Contact[] = [
   {
     role: 'Sales Department',
     name: 'Sales Rep',
-    phone: '2348028998975',
+    phone: '2348110191956',
     message: 'Hello, I am interested in purchasing a property and would like to speak with Sales.'
   },
   {
     role: 'Property Manager',
     name: 'Management',
-    phone: '2348028998975',
+    phone: '2349020023672',
     message: 'Hello, I have an inquiry regarding property management.'
   },
   {
     role: 'Technical Support',
     name: 'Support Team',
-    phone: '2348028998975',
+    phone: '2348110191956',
     message: 'Hello, I need technical support.'
   }
 ]
