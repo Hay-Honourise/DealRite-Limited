@@ -231,7 +231,7 @@ export default function HomePage() {
                   <Link href="https://surveyheart.com/form/69e462b8001e39939dc2b237" target="_blank" className="flex-1 text-center bg-slate-900 text-white px-4 py-3 rounded-xl font-medium hover:bg-slate-800 transition whitespace-nowrap">
                     Book Inspection
                   </Link>
-                  <Link href="/faqs" className="flex-1 text-center bg-orange-100 text-orange-600 px-4 py-3 rounded-xl font-medium hover:bg-orange-200 transition">
+                  <Link href="/faqs#ownfarm" className="flex-1 text-center bg-orange-100 text-orange-600 px-4 py-3 rounded-xl font-medium hover:bg-orange-200 transition">
                     FAQs
                   </Link>
                 </div>
@@ -277,7 +277,7 @@ export default function HomePage() {
                   <Link href="https://surveyheart.com/form/69e462b8001e39939dc2b237" target="_blank" className="flex-1 text-center bg-slate-900 text-white px-4 py-3 rounded-xl font-medium hover:bg-slate-800 transition whitespace-nowrap">
                     Book Inspection
                   </Link>
-                  <Link href="/faqs" className="flex-1 text-center bg-orange-100 text-orange-600 px-4 py-3 rounded-xl font-medium hover:bg-orange-200 transition">
+                  <Link href="/faqs#coastal" className="flex-1 text-center bg-orange-100 text-orange-600 px-4 py-3 rounded-xl font-medium hover:bg-orange-200 transition">
                     FAQs
                   </Link>
                 </div>
@@ -330,60 +330,44 @@ export default function HomePage() {
             <div className="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-orange-50/10 to-transparent z-10 pointer-events-none"></div>
             <div className="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-orange-50/10 to-transparent z-10 pointer-events-none"></div>
 
-            <div className="flex w-max gap-6 animate-marquee whitespace-nowrap hover:[animation-play-state:paused]">
+            <div className="flex w-max gap-6 animate-marquee items-center py-4 hover:[animation-play-state:paused]">
               {/* First Set of reviews */}
-              {reviews.map((review, index) => (
-                <div 
-                  key={`review-1-${index}`} 
-                  className="bg-white rounded-2xl p-6 shadow-xl shadow-orange-600/5 border border-orange-100/20 flex flex-col justify-between w-[320px] shrink-0 whitespace-normal hover:scale-[1.02] transition duration-300"
-                >
-                  <div>
-                    {/* Stars */}
-                    <div className="flex gap-1 mb-4">
-                      {[...Array(review.stars)].map((_, i) => (
-                        <Star key={i} className="w-5 h-5 fill-current text-orange-500" />
-                      ))}
-                    </div>
-                    
-                    {/* Quote */}
-                    <p className="text-slate-600 text-sm leading-relaxed mb-6 font-medium italic">
-                      &ldquo;{review.quote}&rdquo;
-                    </p>
+              {[...Array(10)].map((_, index) => {
+                const num = index + 1;
+                return (
+                  <div 
+                    key={`review-1-${num}`} 
+                    className="relative h-[380px] w-[260px] shrink-0 rounded-3xl overflow-hidden border border-slate-100 bg-white hover:scale-[1.03] transition duration-300 shadow-xl shadow-orange-950/5"
+                  >
+                    <Image 
+                      src={`/Allocation   ${num}.png`}
+                      alt={`Client Review Allocation ${num}`}
+                      fill
+                      sizes="260px"
+                      className="object-contain p-2"
+                    />
                   </div>
-                  
-                  {/* Author */}
-                  <div className="text-slate-900 font-bold text-sm tracking-wide text-left mt-auto">
-                    - {review.author}
-                  </div>
-                </div>
-              ))}
+                )
+              })}
 
               {/* Second Set of reviews for continuous looping */}
-              {reviews.map((review, index) => (
-                <div 
-                  key={`review-2-${index}`} 
-                  className="bg-white rounded-2xl p-6 shadow-xl shadow-orange-600/5 border border-orange-100/20 flex flex-col justify-between w-[320px] shrink-0 whitespace-normal hover:scale-[1.02] transition duration-300"
-                >
-                  <div>
-                    {/* Stars */}
-                    <div className="flex gap-1 mb-4">
-                      {[...Array(review.stars)].map((_, i) => (
-                        <Star key={i} className="w-5 h-5 fill-current text-orange-500" />
-                      ))}
-                    </div>
-                    
-                    {/* Quote */}
-                    <p className="text-slate-600 text-sm leading-relaxed mb-6 font-medium italic">
-                      &ldquo;{review.quote}&rdquo;
-                    </p>
+              {[...Array(10)].map((_, index) => {
+                const num = index + 1;
+                return (
+                  <div 
+                    key={`review-2-${num}`} 
+                    className="relative h-[380px] w-[260px] shrink-0 rounded-3xl overflow-hidden border border-slate-100 bg-white hover:scale-[1.03] transition duration-300 shadow-xl shadow-orange-950/5"
+                  >
+                    <Image 
+                      src={`/Allocation   ${num}.png`}
+                      alt={`Client Review Allocation ${num}`}
+                      fill
+                      sizes="260px"
+                      className="object-contain p-2"
+                    />
                   </div>
-                  
-                  {/* Author */}
-                  <div className="text-slate-900 font-bold text-sm tracking-wide text-left mt-auto">
-                    - {review.author}
-                  </div>
-                </div>
-              ))}
+                )
+              })}
             </div>
           </div>
         </div>

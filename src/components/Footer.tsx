@@ -49,22 +49,48 @@ export default function Footer() {
               We provide premium, secure, and modern living spaces designed for comfort and everyday living. Find your dream home or next investment with us.
             </p>
             <div className="flex flex-wrap gap-3">
-              <a href="#" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-orange-600 transition-colors text-white">
+              <a 
+                href="https://www.facebook.com/share/1jDXDPRJNP/?mibextid=wwXIfr" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-[#FC6600] transition-colors text-white"
+              >
                 <Facebook className="w-5 h-5" />
               </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-orange-600 transition-colors text-white">
+              <a 
+                href="https://www.instagram.com/dealriterealty?igsh=MXR4OTRxbWIxM3MwZQ==" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-[#FC6600] transition-colors text-white"
+              >
                 <Instagram className="w-5 h-5" />
               </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-orange-600 transition-colors text-white">
+              <a 
+                href="https://x.com/dealriterealty?s=21" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-[#FC6600] transition-colors text-white"
+              >
                 <TwitterX className="w-5 h-5" />
               </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-orange-600 transition-colors text-white">
+              <a 
+                href="#" 
+                className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-[#FC6600] transition-colors text-white"
+              >
                 <Linkedin className="w-5 h-5" />
               </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-orange-600 transition-colors text-white">
+              <a 
+                href="https://www.tiktok.com/@dealrite.realty?_r=1&_t=ZS-97iChQfF45s" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-[#FC6600] transition-colors text-white"
+              >
                 <Tiktok className="w-5 h-5" />
               </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-orange-600 transition-colors text-white">
+              <a 
+                href="#" 
+                className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-[#FC6600] transition-colors text-white"
+              >
                 <Youtube className="w-5 h-5" />
               </a>
             </div>

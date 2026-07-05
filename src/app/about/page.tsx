@@ -179,8 +179,8 @@ export default function AboutPage() {
             {/* Right Column: Custom Property Image */}
             <div className="lg:col-span-5 relative h-[450px] md:h-[550px] w-full rounded-3xl overflow-hidden shadow-2xl border border-slate-100 bg-slate-50">
               <Image 
-                src="https://images.unsplash.com/photo-1582407947304-fd86f028f716?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
-                alt="DealRite Properties"
+                src="/groupa.png"
+                alt="DealRite Group Photo"
                 fill
                 sizes="(max-width: 768px) 100vw, 40vw"
                 className="object-cover"

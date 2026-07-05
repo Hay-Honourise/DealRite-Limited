@@ -206,12 +206,20 @@ function ProjectsContent() {
                   {/* Actions */}
                   <div className="flex flex-col sm:flex-row gap-3 mt-auto">
                     {isSold ? (
-                      <button 
-                        disabled 
-                        className="flex-1 text-center bg-slate-200 text-slate-400 px-4 py-3 rounded-xl font-semibold cursor-not-allowed"
-                      >
-                        Sold Out
-                      </button>
+                      <div className="flex gap-3 w-full">
+                        <button 
+                          disabled 
+                          className="flex-1 text-center bg-slate-200 text-slate-400 px-4 py-3 rounded-xl font-semibold cursor-not-allowed"
+                        >
+                          Sold Out
+                        </button>
+                        <Link 
+                          href={project.id === 'ownfarm-phase1' ? '/faqs#ownfarm-phase1' : '/faqs'} 
+                          className="flex-1 text-center bg-orange-100 text-orange-600 px-4 py-3 rounded-xl font-semibold hover:bg-orange-200 transition flex items-center justify-center"
+                        >
+                          FAQs
+                        </Link>
+                      </div>
                     ) : (
                       <>
                         <Link 
@@ -222,7 +230,7 @@ function ProjectsContent() {
                           Book Inspection
                         </Link>
                         <Link 
-                          href="/faqs" 
+                          href={project.id === 'ownfarm-phase2' ? '/faqs#ownfarm' : project.id === 'coastal' ? '/faqs#coastal' : '/faqs'} 
                           className="flex-1 text-center bg-orange-100 text-orange-600 px-4 py-3 rounded-xl font-semibold hover:bg-orange-200 transition"
                         >
                           FAQs & Details

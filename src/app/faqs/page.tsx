@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronDown, HelpCircle, TreePine, Waves, Download, CreditCard, AlertCircle } from 'lucide-react'
 import Image from 'next/image'
@@ -34,17 +34,17 @@ const coastalFAQs: FAQType[] = [
   { question: "Important Notice / Disclaimer", answer: "NOTE:\nUpon subscription, you are required to fill your personal contact details (Phone number and email) on your subscription form to enable us to give necessary information with respect to your property as against going through your representative.\n\nThe Company will not be liable for information not received by your result of breach of clause above.\n\nThe only part recognised by the company in receiving instructions and execution of documents as regards the property is the Client and in the event where the client intends to delegate that responsibility to a third party, a written instruction either in a letter form or an official email has to be sent to the Company's official email address before such third party can be recognised." }
 ]
 
-const ownFarmFAQs: FAQType[] = [
-  { question: "Who's the developer of Own Farm Estate?", answer: "The developer of Own Farm Estate is DealRiteRealty Limited; a Real Estate company fully registered by the Corporate Affairs Commission (CAC NO: 8734383) and licensed by Special Control Unit Against Money Laundering (SCUML RN: SC 311803025)" },
-  { question: "What exactly is Own Farm Estate offering?", answer: "This project is a unique blend of Real Estate and agriculture. This implies that it combines land ownership with agricultural income.\n\nOwn Farm Estate offers investors the opportunity to own agricultural real estate with a focus on cassava, tomatoes, maize and palm farming. You acquire the land (in various sizes from 500sqm to multiple hectares) which we professionally manage for cultivation, generating returns through harvest yields." },
-  { question: "Where is the project located?", answer: "Own Farm Estate is strategically located in Fiditi, Oyo Town, Oyo State." },
-  { question: "What type of Title does the Land has?", answer: "The Land has a REGISTERED SURVEY." },
+const ownFarmPhase2FAQs: FAQType[] = [
+  { question: "Who's the developer of Own Farm Estate (Phase 2)?", answer: "The developer of Own Farm Estate (Phase 2) is DealRiteRealty Limited; a Real Estate company fully registered by the Corporate Affairs Commission (CAC NO: 8734383) and licensed by Special Control Unit Against Money Laundering (SCUML RN: SC 311803025)" },
+  { question: "What exactly is Own Farm Estate (Phase 2) offering?", answer: "This project is a unique blend of Real Estate and agriculture. This implies that it combines land ownership with agricultural income.\n\nOwn Farm Estate (Phase 2) offers investors the opportunity to own agricultural real estate with a focus on cassava, tomatoes, maize and palm farming. You acquire the land (in various sizes from 500sqm to multiple hectares) which we professionally manage for cultivation, generating returns through harvest yields." },
+  { question: "Where is the project located?", answer: "Own Farm Estate (Phase 2) is strategically located in Fiditi, Ibadan—Oyo Road, Oyo State." },
+  { question: "What type of Title does the Land have?", answer: "OwnFarm Estate (Phase 2) comes with a Registered Survey and a Deed of Assignment." },
   { question: "Are there any encumbrances on the land?", answer: "The land is totally free from government acquisition, adverse claim or any form of encumbrance." },
   { question: "Is the road to the Property motorable?", answer: "Yes, Road to the Property is Motorable." },
-  { question: "What are the Landmarks & Neighborhood?", answer: "• Kola Daisi University\n• Micheal Koleosho GRA\n• Bethel America College\n• Gray West Mineral Processing Center\n• Deeper Life High School\n• New Hope College of Health Technology" },
-  { question: "What are the payment structure for instalment?", answer: "• 0—3 months (for 500sqm and 1000sqm)\n• 0—6 months (for Half Acre, 1 Acre, 1 Hectare)\n\nInterest Free For All Instalment Package" },
+  { question: "What are the Landmarks & Neighborhood?", answer: "• Kola Daisi University\n• Fiditi Grammar School\n• Micheal Koleosho GRA\n• Bethel American College\n• Deeper Life High School\n• Grey West Mineral Processing Center\n• Hope College Of Health Technology" },
+  { question: "What are the payment structures?", answer: "0–6 Months Payment Plan. NO interest! NO pressure!" },
   {
-    question: "Plot sizes, Prices & Initial Deposit",
+    question: "Plot sizes & Prices",
     answer: (
       <div className="overflow-x-auto mt-2">
         <table className="w-full text-left border-collapse border border-green-200 shadow-sm rounded-lg overflow-hidden">
@@ -52,23 +52,23 @@ const ownFarmFAQs: FAQType[] = [
             <tr className="bg-green-50 text-green-900">
               <th className="border border-green-100 p-3 font-semibold text-sm">Plot sizes available</th>
               <th className="border border-green-100 p-3 font-semibold text-sm">Price</th>
-              <th className="border border-green-100 p-3 font-semibold text-sm">Initial Deposit</th>
+              <th className="border border-green-100 p-3 font-semibold text-sm">Payment Plan (0-6 Months)</th>
             </tr>
           </thead>
           <tbody>
-            <tr className="hover:bg-slate-50"><td className="border border-green-100 p-3 text-sm">1 Plot (500sqm)</td><td className="border border-green-100 p-3 text-sm font-medium">N500,000</td><td className="border border-green-100 p-3 text-sm font-medium">N200,000</td></tr>
-            <tr className="hover:bg-slate-50"><td className="border border-green-100 p-3 text-sm">3 Plots (1500sqm)</td><td className="border border-green-100 p-3 text-sm font-medium">N1,500,000</td><td className="border border-green-100 p-3 text-sm font-medium">N500,000</td></tr>
-            <tr className="hover:bg-slate-50"><td className="border border-green-100 p-3 text-sm">6 Plots (3000sqm)</td><td className="border border-green-100 p-3 text-sm font-medium">N3,000,000</td><td className="border border-green-100 p-3 text-sm font-medium">N1,000,000</td></tr>
-            <tr className="hover:bg-slate-50"><td className="border border-green-100 p-3 text-sm">15 Plots (7,500sqm)</td><td className="border border-green-100 p-3 text-sm font-medium">N7,500,000</td><td className="border border-green-100 p-3 text-sm font-medium">N2,000,000</td></tr>
+            <tr className="hover:bg-slate-50"><td className="border border-green-100 p-3 text-sm">1 Plot (500sqm)</td><td className="border border-green-100 p-3 text-sm font-medium">₦800,000</td><td className="border border-green-100 p-3 text-sm font-medium text-green-600">Interest-Free</td></tr>
+            <tr className="hover:bg-slate-50"><td className="border border-green-100 p-3 text-sm">2 Plots (1000sqm)</td><td className="border border-green-100 p-3 text-sm font-medium">₦1,600,000</td><td className="border border-green-100 p-3 text-sm font-medium text-green-600">Interest-Free</td></tr>
+            <tr className="hover:bg-slate-50"><td className="border border-green-100 p-3 text-sm">Half Acre (3 Plots / 1500sqm)</td><td className="border border-green-100 p-3 text-sm font-medium">₦2,400,000</td><td className="border border-green-100 p-3 text-sm font-medium text-green-600">Interest-Free</td></tr>
+            <tr className="hover:bg-slate-50"><td className="border border-green-100 p-3 text-sm">1 Acre (6 Plots / 3000sqm)</td><td className="border border-green-100 p-3 text-sm font-medium">₦4,800,000</td><td className="border border-green-100 p-3 text-sm font-medium text-green-600">Interest-Free</td></tr>
           </tbody>
         </table>
       </div>
     )
   },
-  { question: "What is the transaction flow?", answer: "The transaction process flow at Own Farm Estate are as follows:\n• Client goes on inspection or appoints a representative to go or request virtual inspection or get videos/photos of the Estate\n• Client make payment for the Land\n• Client fills the Subscription form and signs.\n• Client collect Payment Acknowledgement Letter/Receipt\n• Client collect Contract of Sale of Land\n• The client signs the Contract of Sale and return a copy\n• Physical Allocation of plot(s) and issuance of Allocation letter\n• Collect Deed of Assignment\n• Collect Provisional Survey\n• Collect Memorandum of Understanding" },
+  { question: "What is the transaction flow?", answer: "The transaction process flow at Own Farm Estate (Phase 2) are as follows:\n• Client goes on inspection or appoints a representative to go or request virtual inspection or get videos/photos of the Estate\n• Client make payment for the Land\n• Client fills the Subscription form and signs.\n• Client collect Payment Acknowledgement Letter/Receipt\n• Client collect Contract of Sale of Land\n• The client signs the Contract of Sale and return a copy\n• Physical Allocation of plot(s) and issuance of Allocation letter\n• Collect Deed of Assignment\n• Collect Registered Survey\n• Collect Memorandum of Understanding" },
   { question: "What documents would I get after the initial Deposit?", answer: "• Welcome on Board/Acknowledgement Letter\n• Payment Receipt\n• Contract Of Sale Of Land\n\nAll shall be sent via your email Address." },
-  { question: "What documents would I get after final payment for my land?", answer: "• Provisional Survey\n• Deed of Assignment\n• Contract of Sales\n• Original Payment Receipt\n• Memorandum of understanding (MOU)\n\nAll of this shall be for free.\nMOU will be issued only after paying the cost for farming." },
-  { question: "How do I get a survey plan for my plot(s)?", answer: "Your Subscription to OwnFarm Estate comes with a FREE Provisional Survey. You will get yours at the point of allocation." },
+  { question: "What documents would I get after final payment for my land?", answer: "• Registered Survey\n• Deed of Assignment\n• Contract of Sales\n• Original Payment Receipt\n• Memorandum of understanding (MOU)\n\nAll of this shall be for free.\nMOU will be issued only after paying the cost for farming." },
+  { question: "How do I get a survey plan for my plot(s)?", answer: "Your Subscription to OwnFarm Estate (Phase 2) comes with a FREE Registered Survey. You will get yours at the point of allocation." },
   { question: "When will my plot(s) be allocated to me and take possession of my plot(s)?", answer: "After 100% completion of payment for your land, and you take possession immediately." },
   { question: "If I make payment, can I request a refund if I'm no longer interested?", answer: "Yes, you can request a refund; however, please note that refund will be 40% less than the entire amount paid at the point of refund. This serves as administrative charges and will be paid within 90 days of approval of the refund or upon resale of the said plot(s)." },
   { question: "Can I pay cash to your agents/realtors?", answer: "No, all payment must be made to our Bank Accounts." },
@@ -80,7 +80,7 @@ const ownFarmFAQs: FAQType[] = [
   { question: "How can I get started with farming?", answer: "The moment you pay 100% for your land payment and 50% for your farming cost." },
   { question: "Can I buy the land and not farm there?", answer: "Yes, subscribers are not mandated to farm. You can also take landbanking. That's, you buy, keep and wait till it appreciates more and then sell or use for other purpose." },
   { question: "Can I extend my investment overtime?", answer: "Yes, subscribers are permitted to start with smaller plot(s) and expand their portfolio when they desire (but it will be at selling price by then peradventure the estate is yet to be sold out)." },
-  { question: "Will my land also appreciate besides my farming return?", answer: "Yes, landed properties are known for appreciation overtime. But, land in strategic location and in an estate appreciate faster and with more massive assured return on investment (ROI). Own Farm Estate has been strategically positioned for this goal as well. The location was selected not only for agricultural productivity but also for long-term development potential." },
+  { question: "Will my land also appreciate besides my farming return?", answer: "Yes, landed properties are known for appreciation overtime. But, land in strategic location and in an estate appreciate faster and with more massive assured return on investment (ROI). Own Farm Estate (Phase 2) has been strategically positioned for this goal as well. The location was selected not only for agricultural productivity but also for long-term development potential." },
   { question: "Can I visit my farm?", answer: "Yes, we encourage that our investors visit their farms. We organize quarterly group farm visits for all investors, and you can schedule additional private visits with advance notice." },
   {
     question: "FINANCIAL QUESTIONS FOR CASSAVA",
@@ -132,6 +132,56 @@ const ownFarmFAQs: FAQType[] = [
   }
 ]
 
+const ownFarmPhase1FAQs: FAQType[] = [
+  { question: "Who's the developer of Own Farm Estate (Phase 1)?", answer: "The developer of Own Farm Estate is DealRiteRealty Limited; a Real Estate company fully registered by the Corporate Affairs Commission (CAC NO: 8734383) and licensed by Special Control Unit Against Money Laundering (SCUML RN: SC 311803025)" },
+  { question: "What exactly is Own Farm Estate (Phase 1) offering?", answer: "This project is a unique blend of Real Estate and agriculture. This implies that it combines land ownership with agricultural income.\n\nOwn Farm Estate (Phase 1) offers investors the opportunity to own agricultural real estate with a focus on cassava, tomatoes, maize and palm farming. You acquire the land (in various sizes from 500sqm to multiple hectares) which we professionally manage for cultivation, generating returns through harvest yields." },
+  { question: "Where is the project located?", answer: "Own Farm Estate (Phase 1) is strategically located in Fiditi, Oyo Town, Oyo State." },
+  { question: "What type of Title does the Land have?", answer: "The Land has a REGISTERED SURVEY (Provisional Survey)." },
+  { question: "Are there any encumbrances on the land?", answer: "The land is totally free from government acquisition, adverse claim or any form of encumbrance." },
+  { question: "Is the road to the Property motorable?", answer: "Yes, Road to the Property is Motorable." },
+  { question: "What are the Landmarks & Neighborhood?", answer: "• Kola Daisi University\n• Micheal Koleosho GRA\n• Bethel America College\n• Gray West Mineral Processing Center\n• Deeper Life High School\n• New Hope College of Health Technology" },
+  { question: "What are the payment structures for instalment?", answer: "• 0—3 months (for 500sqm and 1000sqm)\n• 0—6 months (for Half Acre, 1 Acre, 1 Hectare)\n\nInterest Free For All Instalment Package" },
+  {
+    question: "Plot sizes, Prices & Initial Deposit (Phase 1)",
+    answer: (
+      <div className="overflow-x-auto mt-2">
+        <table className="w-full text-left border-collapse border border-green-200 shadow-sm rounded-lg overflow-hidden">
+          <thead>
+            <tr className="bg-green-50 text-green-900">
+              <th className="border border-green-100 p-3 font-semibold text-sm">Plot sizes available</th>
+              <th className="border border-green-100 p-3 font-semibold text-sm">Price</th>
+              <th className="border border-green-100 p-3 font-semibold text-sm">Initial Deposit</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr className="hover:bg-slate-50"><td className="border border-green-100 p-3 text-sm">1 Plot (500sqm)</td><td className="border border-green-100 p-3 text-sm font-medium">N500,000</td><td className="border border-green-100 p-3 text-sm font-medium">N200,000</td></tr>
+            <tr className="hover:bg-slate-50"><td className="border border-green-100 p-3 text-sm">3 Plots (1500sqm)</td><td className="border border-green-100 p-3 text-sm font-medium">N1,500,000</td><td className="border border-green-100 p-3 text-sm font-medium">N500,000</td></tr>
+            <tr className="hover:bg-slate-50"><td className="border border-green-100 p-3 text-sm">6 Plots (3000sqm)</td><td className="border border-green-100 p-3 text-sm font-medium">N3,000,000</td><td className="border border-green-100 p-3 text-sm font-medium">N1,000,000</td></tr>
+            <tr className="hover:bg-slate-50"><td className="border border-green-100 p-3 text-sm">15 Plots (7,500sqm)</td><td className="border border-green-100 p-3 text-sm font-medium">N7,500,000</td><td className="border border-green-100 p-3 text-sm font-medium">N2,000,000</td></tr>
+          </tbody>
+        </table>
+      </div>
+    )
+  },
+  { question: "What is the transaction flow?", answer: "The transaction process flow at Own Farm Estate are as follows:\n• Client goes on inspection or appoints a representative to go or request virtual inspection or get videos/photos of the Estate\n• Client make payment for the Land\n• Client fills the Subscription form and signs.\n• Client collect Payment Acknowledgement Letter/Receipt\n• Client collect Contract of Sale of Land\n• The client signs the Contract of Sale and return a copy\n• Physical Allocation of plot(s) and issuance of Allocation letter\n• Collect Deed of Assignment\n• Collect Provisional Survey\n• Collect Memorandum of Understanding" },
+  { question: "What documents would I get after the initial Deposit?", answer: "• Welcome on Board/Acknowledgement Letter\n• Payment Receipt\n• Contract Of Sale Of Land\n\nAll shall be sent via your email Address." },
+  { question: "What documents would I get after final payment for my land?", answer: "• Provisional Survey\n• Deed of Assignment\n• Contract of Sales\n• Original Payment Receipt\n• Memorandum of understanding (MOU)\n\nAll of this shall be for free.\nMOU will be issued only after paying the cost for farming." },
+  { question: "How do I get a survey plan for my plot(s)?", answer: "Your Subscription to OwnFarm Estate comes with a FREE Provisional Survey. You will get yours at the point of allocation." },
+  { question: "When will my plot(s) be allocated to me and take possession of my plot(s)?", answer: "After 100% completion of payment for your land, and you take possession immediately." },
+  { question: "If I make payment, can I request a refund if I'm no longer interested?", answer: "Yes, you can request a refund; however, please note that refund will be 40% less than the entire amount paid at the point of refund. This serves as administrative charges and will be paid within 90 days of approval of the refund or upon resale of the said plot(s)." },
+  { question: "Can I pay cash to your agents/realtors?", answer: "No, all payment must be made to our Bank Accounts." },
+  { question: "Will I be affected by Price Increase/Sold Out after paying initial Deposit?", answer: "No, subscribers shall not be affected by Price Increase or Sold out after making an initial deposit. You automatically have a fixed allocation after your initial deposit." },
+  { question: "Do I need farming experience to invest?", answer: "No farming experience is needed to invest in Own Farm. We have a team of professional agriculturist handling all aspects." },
+  { question: "When can I claim my return on investment?", answer: "After 12 months." },
+  { question: "Do I get incentive for investing here?", answer: "Yes, you get 1 Plot free if you buy 1 Hectare." },
+  { question: "What does the cost of farming cover?", answer: "• Soil Analysis\n• Input procurement\n• Land preparation: clearing, ploughing, harrowing, ridging, ETC\n• Planting\n• Pest control\n• Supervision/Security\n• Harvesting" },
+  { question: "How can I get started with farming?", answer: "The moment you pay 100% for your land payment and 50% for your farming cost." },
+  { question: "Can I buy the land and not farm there?", answer: "Yes, subscribers are not mandated to farm. You can also take landbanking. That's, you buy, keep and wait till it appreciates more and then sell or use for other purpose." },
+  { question: "Can I extend my investment overtime?", answer: "Yes, subscribers are permitted to start with smaller plot(s) and expand their portfolio when they desire (but it will be at selling price by then peradventure the estate is yet to be sold out)." },
+  { question: "Will my land also appreciate besides my farming return?", answer: "Yes, landed properties are known for appreciation overtime. But, land in strategic location and in an estate appreciate faster and with more massive assured return on investment (ROI). Own Farm Estate has been strategically positioned for this goal as well. The location was selected not only for agricultural productivity but also for long-term development potential." },
+  { question: "Can I visit my farm?", answer: "Yes, we encourage that our investors visit their farms. We organize quarterly group farm visits for all investors, and you can schedule additional private visits with advance notice." }
+]
+
 const FAQItem = ({ question, answer }: { question: string, answer: React.ReactNode }) => {
   const [isOpen, setIsOpen] = useState(false)
 
@@ -165,6 +215,18 @@ const FAQItem = ({ question, answer }: { question: string, answer: React.ReactNo
 }
 
 export default function FAQsPage() {
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.location.hash) {
+      const id = window.location.hash.substring(1)
+      const element = document.getElementById(id)
+      if (element) {
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        }, 200)
+      }
+    }
+  }, [])
+
   return (
     <div className="min-h-screen bg-slate-50 pt-32 pb-24">
       {/* Header Section */}
@@ -184,85 +246,129 @@ export default function FAQsPage() {
           {/* Main FAQ Content */}
           <div className="lg:col-span-2 space-y-24">
             {/* Coastal Residence Section */}
-            <div className="relative">
-          <div className="flex items-center gap-4 mb-6">
-            <div className="w-12 h-12 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center shrink-0 shadow-sm">
-              <Waves className="w-6 h-6" />
+            <div id="coastal" className="relative scroll-mt-28">
+              <div className="flex items-center gap-4 mb-6">
+                <div className="w-12 h-12 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center shrink-0 shadow-sm">
+                  <Waves className="w-6 h-6" />
+                </div>
+                <div className="flex-grow">
+                  <div className="flex items-center gap-3 flex-wrap">
+                    <h2 className="text-3xl font-bold text-slate-900">Coastal Residence</h2>
+                    <span className="bg-orange-600 text-white text-[11px] font-bold px-2.5 py-0.5 rounded-full shadow-sm">
+                      Currently Selling
+                    </span>
+                  </div>
+                  <p className="text-slate-500 mt-1">Everything you need to know about our premium housing development.</p>
+                </div>
+              </div>
+              
+              <div className="mb-8 rounded-2xl overflow-hidden shadow-md border border-slate-100 max-w-xl mx-auto">
+                <Image 
+                  src="/coastal_prelaunch.jpg" 
+                  alt="Coastal Residence Estate" 
+                  width={1000} 
+                  height={500} 
+                  className="w-full h-48 md:h-56 object-cover hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+              
+              <div className="space-y-4">
+                {coastalFAQs.map((faq, idx) => (
+                  <FAQItem key={idx} question={faq.question} answer={faq.answer} />
+                ))}
+              </div>
+              
+              <div className="mt-8 flex justify-center md:justify-start">
+                <a 
+                  href="https://drive.google.com/drive/u/0/folders/1CiZjZv3SBc2xVbf18KrxJusl4M4XCKns?ths=true" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-xl font-medium hover:bg-blue-700 transition shadow-md hover:shadow-lg"
+                >
+                  <Download className="w-5 h-5" />
+                  Read & Download PDF
+                </a>
+              </div>
             </div>
-            <div>
-              <h2 className="text-3xl font-bold text-slate-900">Coastal Residence</h2>
-              <p className="text-slate-500 mt-1">Everything you need to know about our premium housing development.</p>
-            </div>
-          </div>
-          
-          <div className="mb-8 rounded-3xl overflow-hidden shadow-lg border border-slate-100">
-            <Image 
-              src="/coastal 1.avif" 
-              alt="Coastal Residence Estate" 
-              width={1000} 
-              height={500} 
-              className="w-full h-auto md:h-80 object-cover"
-            />
-          </div>
-          
-          <div className="space-y-4">
-            {coastalFAQs.map((faq, idx) => (
-              <FAQItem key={idx} question={faq.question} answer={faq.answer} />
-            ))}
-          </div>
-          
-          <div className="mt-8 flex justify-center md:justify-start">
-            <a 
-              href="https://drive.google.com/drive/u/0/folders/1CiZjZv3SBc2xVbf18KrxJusl4M4XCKns?ths=true" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-xl font-medium hover:bg-blue-700 transition shadow-md hover:shadow-lg"
-            >
-              <Download className="w-5 h-5" />
-              Read & Download PDF
-            </a>
-          </div>
-        </div>
 
-        {/* DealRite OwnFarm Section */}
-        <div className="relative">
-          <div className="flex items-center gap-4 mb-6">
-            <div className="w-12 h-12 bg-green-100 text-green-600 rounded-xl flex items-center justify-center shrink-0 shadow-sm">
-              <TreePine className="w-6 h-6" />
-            </div>
-            <div>
-              <h2 className="text-3xl font-bold text-slate-900">DealRite OwnFarm</h2>
-              <p className="text-slate-500 mt-1">Learn how to invest and earn through our agricultural real estate initiative.</p>
-            </div>
-          </div>
+            {/* DealRite OwnFarm Section */}
+            <div id="ownfarm" className="relative scroll-mt-28">
+              <div className="flex items-center gap-4 mb-6">
+                <div className="w-12 h-12 bg-green-100 text-green-600 rounded-xl flex items-center justify-center shrink-0 shadow-sm">
+                  <TreePine className="w-6 h-6" />
+                </div>
+                <div className="flex-grow">
+                  <div className="flex items-center gap-3 flex-wrap">
+                    <h2 className="text-3xl font-bold text-slate-900">DealRite OwnFarm (Phase 2)</h2>
+                    <span className="bg-green-600 text-white text-[11px] font-bold px-2.5 py-0.5 rounded-full shadow-sm">
+                      Currently Selling
+                    </span>
+                  </div>
+                  <p className="text-slate-500 mt-1">Learn how to invest and earn through our agricultural real estate Phase 2 initiative.</p>
+                </div>
+              </div>
 
-          <div className="mb-8 rounded-3xl overflow-hidden shadow-lg border border-slate-100">
-            <Image 
-              src="/farm1.jpg" 
-              alt="DealRite OwnFarm" 
-              width={1000} 
-              height={500} 
-              className="w-full h-auto md:h-80 object-cover"
-            />
-          </div>
-          
-          <div className="space-y-4">
-            {ownFarmFAQs.map((faq, idx) => (
-              <FAQItem key={idx} question={faq.question} answer={faq.answer} />
-            ))}
-          </div>
-          
-          <div className="mt-8 flex justify-center md:justify-start">
-            <a 
-              href="https://drive.google.com/drive/u/0/folders/1CiZjZv3SBc2xVbf18KrxJusl4M4XCKns?ths=true" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-green-600 text-white px-6 py-3 rounded-xl font-medium hover:bg-green-700 transition shadow-md hover:shadow-lg"
-            >
-              <Download className="w-5 h-5" />
-              Read & Download PDF
-            </a>
-          </div>
+              <div className="mb-8 rounded-2xl overflow-hidden shadow-md border border-slate-100 max-w-xl mx-auto">
+                <Image 
+                  src="/ownfarm_phase2.jpg" 
+                  alt="DealRite OwnFarm (Phase 2)" 
+                  width={1000} 
+                  height={500} 
+                  className="w-full h-48 md:h-56 object-cover hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+              
+              <div className="space-y-4">
+                {ownFarmPhase2FAQs.map((faq, idx) => (
+                  <FAQItem key={idx} question={faq.question} answer={faq.answer} />
+                ))}
+              </div>
+              
+              <div className="mt-8 flex justify-center md:justify-start">
+                <a 
+                  href="https://drive.google.com/drive/u/0/folders/1CiZjZv3SBc2xVbf18KrxJusl4M4XCKns?ths=true" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 bg-green-600 text-white px-6 py-3 rounded-xl font-medium hover:bg-green-700 transition shadow-md hover:shadow-lg"
+                >
+                  <Download className="w-5 h-5" />
+                  Read & Download PDF
+                </a>
+              </div>
+            </div>
+
+            {/* DealRite OwnFarm Phase 1 Section */}
+            <div id="ownfarm-phase1" className="relative scroll-mt-28 border-t border-slate-200 pt-16">
+              <div className="flex items-center gap-4 mb-6">
+                <div className="w-12 h-12 bg-slate-100 text-slate-600 rounded-xl flex items-center justify-center shrink-0 shadow-sm">
+                  <TreePine className="w-6 h-6" />
+                </div>
+                <div className="flex-grow">
+                  <div className="flex items-center gap-3 flex-wrap">
+                    <h2 className="text-3xl font-bold text-slate-900">DealRite OwnFarm (Phase 1)</h2>
+                    <span className="bg-slate-500 text-white text-[11px] font-bold px-2.5 py-0.5 rounded-full shadow-sm">
+                      Sold Out
+                    </span>
+                  </div>
+                  <p className="text-slate-500 mt-1">Reference information for our completed Phase 1 agricultural initiative.</p>
+                </div>
+              </div>
+
+              <div className="mb-8 rounded-2xl overflow-hidden shadow-md border border-slate-100 max-w-xl mx-auto filter grayscale">
+                <Image 
+                  src="/ownfarm_soldout.jpg" 
+                  alt="DealRite OwnFarm (Phase 1) - Sold Out" 
+                  width={1000} 
+                  height={500} 
+                  className="w-full h-48 md:h-56 object-cover hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+              
+              <div className="space-y-4">
+                {ownFarmPhase1FAQs.map((faq, idx) => (
+                  <FAQItem key={idx} question={faq.question} answer={faq.answer} />
+                ))}
+              </div>
             </div>
           </div>
           

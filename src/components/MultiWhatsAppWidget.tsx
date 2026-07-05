@@ -17,28 +17,24 @@ const WhatsAppIcon = ({ className }: { className?: string }) => (
 interface Contact {
   role: string
   name: string
-  phone: string
-  message: string
+  url: string
 }
 
 const contacts: Contact[] = [
   {
     role: 'Sales Department',
     name: 'Sales Rep',
-    phone: '2348110191956',
-    message: 'Hello, I am interested in purchasing a property and would like to speak with Sales.'
+    url: 'https://wa.me/qr/BZ3VWS4HJBJRA1'
   },
   {
     role: 'Property Manager',
     name: 'Management',
-    phone: '2349020023672',
-    message: 'Hello, I have an inquiry regarding property management.'
+    url: 'https://wa.me/2349012749501?src=qr'
   },
   {
     role: 'Technical Support',
     name: 'Support Team',
-    phone: '2348110191956',
-    message: 'Hello, I need technical support.'
+    url: 'https://wa.me/message/ZZQV7TUVX6NQM1?src=qr'
   }
 ]
 
@@ -46,8 +42,7 @@ export default function MultiWhatsAppWidget() {
   const [isOpen, setIsOpen] = useState(false)
 
   const handleWhatsAppClick = (contact: Contact) => {
-    const url = `https://wa.me/${contact.phone}?text=${encodeURIComponent(contact.message)}`
-    window.open(url, '_blank')
+    window.open(contact.url, '_blank')
   }
 
   return (
