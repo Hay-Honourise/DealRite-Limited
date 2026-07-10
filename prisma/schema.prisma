@@ -8,19 +8,19 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "mysql"
   url      = env("DATABASE_URL")
 }
 
 model Property {
   id          String   @id @default(uuid())
   title       String
-  description String
+  description String   @db.Text
   location    String
   price       String
   status      String   // "Ongoing", "Upcoming", "Completed"
-  features    String   // Stored as JSON string
-  images      String   // Stored as JSON string of URLs
+  features    String   @db.Text // Stored as JSON string
+  images      String   @db.Text // Stored as JSON string of URLs
   inquiries   Inquiry[]
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
@@ -31,7 +31,7 @@ model Inquiry {
   name       String
   email      String
   phone      String
-  message    String
+  message    String   @db.Text
   propertyId String?
   property   Property? @relation(fields: [propertyId], references: [id])
   status     String   @default("Pending") // "Pending", "Contacted"
@@ -59,9 +59,9 @@ model BlogPost {
   id          Int      @id @default(autoincrement())
   title       String
   slug        String   @unique
-  excerpt     String   // Will be VarChar(500) in MySQL
-  coverImage  String   // Will be Text in MySQL
-  content     String   // Will be LongText in MySQL
+  excerpt     String   @db.VarChar(500)
+  coverImage  String   @db.Text
+  content     String   @db.LongText
   category    String
   published   Boolean  @default(true)
   views       Int      @default(0)

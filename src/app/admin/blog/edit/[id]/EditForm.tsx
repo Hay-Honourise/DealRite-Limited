@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { ArrowLeft, Send, Eye, Edit2, Loader2, FileText, CheckCircle, AlertCircle } from 'lucide-react'
+import { ArrowLeft, Send, Eye, Edit2, Loader2, FileText, CheckCircle, AlertCircle, Upload, Check } from 'lucide-react'
 import Image from 'next/image'
 
 type PostData = {
@@ -39,6 +39,11 @@ export default function EditForm({ post }: EditFormProps) {
   const [error, setError] = useState<string | null>(null)
   const [success, setSuccess] = useState(false)
   const [activeTab, setActiveTab] = useState<'edit' | 'preview'>('edit')
+  
+  // Image upload state
+  const [uploadMode, setUploadMode] = useState<'url' | 'file'>('url')
+  const [uploadingFile, setUploadingFile] = useState(false)
+  const [fileUploadError, setFileUploadError] = useState<string | null>(null)
 
   // Load available categories dynamically
   useEffect(() => {
@@ -59,6 +64,36 @@ export default function EditForm({ post }: EditFormProps) {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target
     setFormData(prev => ({ ...prev, [name]: value }))
+  }
+
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (!file) return
+
+    setUploadingFile(true)
+    setFileUploadError(null)
+
+    const uploadFormData = new FormData()
+    uploadFormData.append('file', file)
+
+    try {
+      const res = await fetch('/api/upload', {
+        method: 'POST',
+        body: uploadFormData,
+      })
+
+      const data = await res.json()
+      if (!res.ok) {
+        throw new Error(data.error || 'Failed to upload image')
+      }
+
+      setFormData(prev => ({ ...prev, coverImage: data.url }))
+    } catch (err: any) {
+      console.error('Upload error:', err)
+      setFileUploadError(err.message || 'Failed to upload image. Please try again.')
+    } finally {
+      setUploadingFile(false)
+    }
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -197,19 +232,92 @@ export default function EditForm({ post }: EditFormProps) {
               </select>
             </div>
 
-            {/* Cover Image URL */}
+            {/* Cover Image URL / Upload */}
             <div>
-              <label htmlFor="coverImage" className="block text-sm font-bold text-slate-800 mb-2">Cover Image URL</label>
-              <input
-                type="url"
-                id="coverImage"
-                name="coverImage"
-                required
-                placeholder="e.g. https://images.unsplash.com/photo-..."
-                value={formData.coverImage}
-                onChange={handleChange}
-                className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-orange-500 bg-slate-50/50 hover:bg-slate-50 transition text-slate-900 text-sm font-medium"
-              />
+              <div className="flex justify-between items-center mb-2">
+                <label className="block text-sm font-bold text-slate-800">Cover Image</label>
+                <div className="flex border border-slate-200 bg-white rounded-lg overflow-hidden p-0.5 shadow-sm shrink-0">
+                  <button
+                    type="button"
+                    onClick={() => setUploadMode('url')}
+                    className={`px-3 py-1 rounded-md text-[10px] uppercase tracking-wider font-extrabold flex items-center gap-1 transition cursor-pointer ${
+                      uploadMode === 'url'
+                        ? 'bg-orange-600 text-white shadow-sm'
+                        : 'text-slate-600 hover:text-slate-900 bg-white'
+                    }`}
+                  >
+                    URL Link
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setUploadMode('file')}
+                    className={`px-3 py-1 rounded-md text-[10px] uppercase tracking-wider font-extrabold flex items-center gap-1 transition cursor-pointer ${
+                      uploadMode === 'file'
+                        ? 'bg-orange-600 text-white shadow-sm'
+                        : 'text-slate-600 hover:text-slate-900 bg-white'
+                    }`}
+                  >
+                    Upload File
+                  </button>
+                </div>
+              </div>
+
+              {uploadMode === 'url' ? (
+                <input
+                  type="url"
+                  id="coverImage"
+                  name="coverImage"
+                  required
+                  placeholder="e.g. https://images.unsplash.com/photo-..."
+                  value={formData.coverImage}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-orange-500 bg-slate-50/50 hover:bg-slate-50 transition text-slate-900 text-sm font-medium"
+                />
+              ) : (
+                <div className="space-y-2">
+                  <div className="flex items-center justify-center border-2 border-dashed border-slate-200 rounded-xl p-4 bg-slate-50/30 hover:bg-slate-50/50 transition">
+                    <div className="text-center space-y-2 flex flex-col items-center">
+                      <input
+                        type="file"
+                        id="coverImageFile"
+                        accept="image/*"
+                        onChange={handleFileChange}
+                        disabled={uploadingFile}
+                        className="hidden"
+                      />
+                      <label
+                        htmlFor="coverImageFile"
+                        className={`cursor-pointer inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-orange-600 hover:bg-orange-700 text-white text-xs font-bold transition shadow-md hover:shadow-lg ${
+                          uploadingFile ? 'opacity-50 cursor-not-allowed' : ''
+                        }`}
+                      >
+                        {uploadingFile ? (
+                          <>
+                            <Loader2 className="w-4 h-4 animate-spin" /> Uploading...
+                          </>
+                        ) : (
+                          <>
+                            <Upload className="w-4 h-4" /> Choose Local Image
+                          </>
+                        )}
+                      </label>
+                      <span className="text-[10px] font-semibold text-slate-400">
+                        Supports PNG, JPG, JPEG, WEBP
+                      </span>
+                    </div>
+                  </div>
+                  {formData.coverImage && (
+                    <div className="flex items-center gap-1.5 text-xs font-bold text-green-500">
+                      <Check className="w-4 h-4" /> Upload successful!
+                    </div>
+                  )}
+                  {fileUploadError && (
+                    <div className="flex items-center gap-1.5 text-xs font-bold text-red-500">
+                      <AlertCircle className="w-4 h-4" /> {fileUploadError}
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
           </div>
 
