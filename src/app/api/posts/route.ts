@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+import { revalidatePath } from 'next/cache'
 import prisma from '@/lib/db'
 import { z } from 'zod'
 
@@ -62,6 +63,9 @@ export async function POST(request: Request) {
         published,
       },
     })
+
+    // Clear Next.js cache so the new post shows up immediately
+    revalidatePath('/blog')
 
     return NextResponse.json(
       { success: true, data: post, message: 'Blog post created successfully!' },

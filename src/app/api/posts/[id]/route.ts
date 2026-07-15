@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+import { revalidatePath } from 'next/cache'
 import prisma from '@/lib/db'
 import { z } from 'zod'
 
@@ -77,6 +78,11 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id: 
       },
     })
 
+    // Clear Next.js cache for the listing and individual post pages
+    revalidatePath('/blog')
+    revalidatePath(`/blog/${existingPost.slug}`)
+    revalidatePath(`/blog/${updatedPost.slug}`)
+
     return NextResponse.json({ success: true, data: updatedPost })
   } catch (error) {
     console.error('Blog post edit error:', error)
@@ -102,6 +108,10 @@ export async function DELETE(request: Request, { params }: { params: Promise<{ i
     await prisma.blogPost.delete({
       where: { id: postId },
     })
+
+    // Clear Next.js cache for the listing and individual post pages
+    revalidatePath('/blog')
+    revalidatePath(`/blog/${existingPost.slug}`)
 
     return NextResponse.json({ success: true, message: 'Blog post deleted successfully!' })
   } catch (error) {
