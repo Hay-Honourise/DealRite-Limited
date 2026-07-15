@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
+import { sendInquiryEmail } from '@/lib/mail';
 
 const prisma = new PrismaClient();
 
@@ -23,8 +24,12 @@ export async function POST(request: Request) {
       },
     });
 
-    // TODO: Later add email integration here (e.g. Resend, SendGrid) to notify consultants
-    // await sendEmailNotification(inquiry);
+    // Send email notification to operations team
+    try {
+      await sendInquiryEmail(inquiry);
+    } catch (mailError) {
+      console.error('Failed to send notification email:', mailError);
+    }
 
     return NextResponse.json({ success: true, data: inquiry }, { status: 201 });
   } catch (error) {
