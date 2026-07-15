@@ -3,7 +3,7 @@
 import { useSearchParams } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
-import { MapPin, Search, Home, Tag, CheckCircle } from 'lucide-react'
+import { MapPin, Search, Home, Tag, CheckCircle, Image as ImageIcon } from 'lucide-react'
 import { Suspense } from 'react'
 
 const PROJECTS_DATA = [
@@ -17,7 +17,7 @@ const PROJECTS_DATA = [
     badge: 'Phase 2 - Currently Selling',
     type: 'Farm Estate',
     image: '/ownfarm_phase2.jpg',
-    link: 'https://surveyheart.com/form/69e462b8001e39939dc2b237',
+    link: 'https://surveyheart.com/form/6a55732b49d3efd14c713a53',
     tagline: 'High yield farming investment'
   },
   {
@@ -30,7 +30,7 @@ const PROJECTS_DATA = [
     badge: 'Pre-Launch - Currently Selling',
     type: 'Residential Homes',
     image: '/coastal_prelaunch.jpg',
-    link: 'https://surveyheart.com/form/69e462b8001e39939dc2b237',
+    link: 'https://surveyheart.com/form/6a55732b49d3efd14c713a53',
     tagline: 'Modern smart living'
   },
   {
@@ -204,38 +204,50 @@ function ProjectsContent() {
                   </div>
 
                   {/* Actions */}
-                  <div className="flex flex-col sm:flex-row gap-3 mt-auto">
-                    {isSold ? (
-                      <div className="flex gap-3 w-full">
-                        <button 
-                          disabled 
-                          className="flex-1 text-center bg-slate-200 text-slate-400 px-4 py-3 rounded-xl font-semibold cursor-not-allowed"
-                        >
-                          Sold Out
-                        </button>
-                        <Link 
-                          href={project.id === 'ownfarm-phase1' ? '/faqs#ownfarm-phase1' : '/faqs'} 
-                          className="flex-1 text-center bg-orange-100 text-orange-600 px-4 py-3 rounded-xl font-semibold hover:bg-orange-200 transition flex items-center justify-center"
-                        >
-                          FAQs
-                        </Link>
-                      </div>
-                    ) : (
-                      <>
-                        <Link 
-                          href={project.link} 
-                          target="_blank"
-                          className="flex-1 text-center bg-slate-900 text-white px-4 py-3 rounded-xl font-semibold hover:bg-slate-800 transition whitespace-nowrap"
-                        >
-                          Book Inspection
-                        </Link>
-                        <Link 
-                          href={project.id === 'ownfarm-phase2' ? '/faqs#ownfarm' : project.id === 'coastal' ? '/faqs#coastal' : '/faqs'} 
-                          className="flex-1 text-center bg-orange-100 text-orange-600 px-4 py-3 rounded-xl font-semibold hover:bg-orange-200 transition"
-                        >
-                          FAQs & Details
-                        </Link>
-                      </>
+                  <div className="flex flex-col gap-3 mt-auto w-full">
+                    <div className="flex gap-3 w-full">
+                      {isSold ? (
+                        <>
+                          <button 
+                            disabled 
+                            className="flex-1 text-center bg-slate-100 text-slate-400 px-4 py-3.5 rounded-xl font-bold cursor-not-allowed text-xs uppercase tracking-wider"
+                          >
+                            Sold Out
+                          </button>
+                          <Link 
+                            href={project.id === 'ownfarm-phase1' ? '/faqs#ownfarm-phase1' : '/faqs'} 
+                            className="flex-1 text-center bg-orange-50 text-[#FC6600] px-4 py-3.5 rounded-xl font-bold hover:bg-orange-100/50 transition flex items-center justify-center text-xs uppercase tracking-wider border border-orange-100"
+                          >
+                            FAQs
+                          </Link>
+                        </>
+                      ) : (
+                        <>
+                          <Link 
+                            href={project.link} 
+                            target="_blank"
+                            className="flex-1 text-center bg-slate-950 text-white px-4 py-3.5 rounded-xl font-bold hover:bg-slate-900 transition whitespace-nowrap text-xs uppercase tracking-wider font-extrabold flex items-center justify-center shadow-lg hover:shadow-xl shadow-slate-950/10"
+                          >
+                            Book Free Inspection
+                          </Link>
+                          <Link 
+                            href={project.id === 'ownfarm-phase2' ? '/faqs#ownfarm' : project.id === 'coastal' ? '/faqs#coastal' : '/faqs'} 
+                            className="flex-1 text-center bg-orange-50 text-[#FC6600] px-4 py-3.5 rounded-xl font-bold hover:bg-orange-100/50 transition text-xs uppercase tracking-wider border border-orange-100 flex items-center justify-center"
+                          >
+                            FAQs & Details
+                          </Link>
+                        </>
+                      )}
+                    </div>
+
+                    {/* View Allocation Gallery */}
+                    {(project.id === 'coastal' || project.id === 'ownfarm-phase2' || project.id === 'ownfarm-phase1') && (
+                      <Link 
+                        href={project.id === 'coastal' ? '/news/allocation/coastal' : '/news/allocation/ownfarm'} 
+                        className="w-full text-center bg-orange-600 hover:bg-orange-700 text-white px-4 py-3.5 rounded-xl font-bold transition text-xs uppercase tracking-wider font-extrabold flex items-center justify-center gap-1.5 shadow-lg shadow-orange-600/10 hover:shadow-orange-600/20 active:scale-[0.99] duration-150"
+                      >
+                        <ImageIcon className="w-4 h-4" /> View Allocation Gallery
+                      </Link>
                     )}
                   </div>
                 </div>

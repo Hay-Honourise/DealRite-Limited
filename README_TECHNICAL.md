@@ -21,6 +21,7 @@ The DealRite Realty Limited portal is a modern, high-performance web application
 ### Backend
 * **Server Framework:** Next.js API Routes (Serverless & Edge Runtime integration).
 * **Validation:** Zod (runtime input validation schemas).
+* **Media Uploads:** Cloudinary API client integration for local image uploads.
 * **Security:**
   * **Password Cryptography:** `bcryptjs` (secure hash with 10 salt rounds).
   * **Session Management:** JSON Web Token (JWT) signatures using the `jose` library.
@@ -28,7 +29,7 @@ The DealRite Realty Limited portal is a modern, high-performance web application
 
 ### Database & ORM
 * **ORM:** Prisma Client ORM (Typesafe database querying).
-* **Database engine:** SQLite (local development `dev.db`) configured for easy migration to MySQL (using native SQL variables in the schema model).
+* **Database engine:** MySQL (production database compatibility, supporting VARCHAR, TEXT, LONGTEXT type mappings). SQLite is supported for local test fallbacks.
 
 ---
 
@@ -177,22 +178,24 @@ Mailing entries.
 ├── prisma/                      # Database Configuration
 │   ├── schema.prisma            # Prisma schema modeling tables and keys
 │   ├── seed.ts                  # Database seeding scripts
-│   └── dev.db                   # Local SQLite DB binary
+│   ├── seed-categories.ts       # Database category seeding script
+│   └── dev.db                   # Local SQLite DB binary (fallback)
 ├── public/                      # Static Assets (Images, Logos)
 ├── src/
 │   ├── app/                     # App Router Architecture
 │   │   ├── about/               # About Us Page
 │   │   ├── admin/               # Administrative Views (Protected)
 │   │   │   ├── blog/            # Admin post directories
-│   │   │   │   ├── edit/        # Edit form view
-│   │   │   │   └── new/         # Tabbed Control Center
+│   │   │   │   ├── edit/        # Edit form view (with Cloudinary uploader)
+│   │   │   │   └── new/         # Tabbed Control Center (with Cloudinary uploader)
 │   │   ├── api/                 # App Router backend routes
 │   │   │   ├── auth/            # Hashing and Token issuance
 │   │   │   ├── categories/      # Category endpoints
 │   │   │   ├── comments/        # Comment moderation
 │   │   │   ├── inquiries/       # Property inquiries
 │   │   │   ├── newsletter/      # Newsletter subscriptions
-│   │   │   └── posts/           # BlogPost CRUD with interactions
+│   │   │   ├── posts/           # BlogPost CRUD with interactions
+│   │   │   └── upload/          # Cloudinary backend image upload endpoint
 │   │   ├── blog/                # Consumer Articles grid & details view
 │   │   │   ├── [slug]/          # Slug detail page with Engagement Panel
 │   │   ├── contact/             # Contact page
@@ -200,7 +203,7 @@ Mailing entries.
 │   │   ├── join/                # Consultant sign-up
 │   │   ├── login/               # Portal authentication page
 │   │   ├── projects/            # Property listings catalog
-│   │   ├── globals.css          # Core CSS stylesheet
+│   │   ├── globals.css          # Core CSS stylesheet (with local system font stack fallbacks)
 │   │   └── layout.tsx           # Page wrappers
 │   ├── components/              # Shared Layout components
 │   │   ├── Navbar.tsx           # Responsive navigation menu
@@ -208,7 +211,7 @@ Mailing entries.
 │   ├── lib/
 │   │   └── db.ts                # Global Prisma Client Singleton
 │   └── proxy.ts                 # Next.js 16 Edge Proxy Interceptor
-├── package.json                 # Project dependencies
+├── package.json                 # Project dependencies (includes Cloudinary client)
 └── next.config.ts               # Next.js configuration rules
 ```
 
@@ -221,6 +224,7 @@ Mailing entries.
 1. **Visitor Inquiry Flow:** A user submits an inquiry form -> `POST /api/inquiries` -> saved in DB -> logs to console (ready for mailing integrations).
 2. **Blog Engagement Flow:** Visitor loads a post -> Client sends background view count update -> `POST /api/posts/[id]/views`. Visitor comments -> `POST /api/posts/[id]/comments` -> client updates local view optimistically.
 3. **Session Verification Flow:** Request is sent to `/admin/blog/new` -> `src/proxy.ts` Edge routing evaluates request -> checks signature of `admin_token` cookie using WebCrypto. If missing or invalid, redirects to `/login`.
+4. **Media Upload Flow:** Author selects a local image -> Client sends payload to `POST /api/upload` -> processes file buffer and streams it to Cloudinary -> returns hosted URL.
 
 ### API Endpoint Registry
 
@@ -242,20 +246,25 @@ Mailing entries.
 | `/api/categories/[id]` | `DELETE` | Deletes a category. | Admin Only |
 | `/api/inquiries` | `POST` | Creates an inquiry record. | Public |
 | `/api/newsletter` | `POST` | Adds a new subscriber. | Public |
+| `/api/upload` | `POST` | Receives multipart form data file, uploads to Cloudinary, and returns public URL. | Admin Only |
 
 ---
 
 ## 6. Configuration & Dependencies
 
 ### Environment Variables (.env)
-* `DATABASE_URL`: Location URL of the sqlite DB binary or MySQL credentials (`file:./dev.db` for local SQLite development).
+* `DATABASE_URL`: Connection string starting with `mysql://` for your production MySQL instance.
 * `JWT_SECRET`: Secret key string used by `jose` to sign and decrypt cookies (`admin_token`).
+* `CLOUDINARY_CLOUD_NAME`: Cloudinary cloud name.
+* `CLOUDINARY_API_KEY`: Cloudinary API key.
+* `CLOUDINARY_API_SECRET`: Cloudinary API secret.
 
 ### Key Package Dependencies
 * `next (16.2.4)`: Application router environment.
 * `react (19.2.4)`: Component layout framework.
 * `prisma (5.22.0)`: DB ORM schema compiler.
 * `@prisma/client (5.22.0)`: Runtime Typesafe DB client query engine.
+* `cloudinary (2.10.0)`: Media uploader engine.
 * `jose`: Pure WebCrypto compliant JSON Web Token signing. Essential for Next.js Edge runtime compatibility.
 * `bcryptjs`: Secure blowfish-based password hashing algorithm.
 * `zod`: Schema validator checking POST objects.

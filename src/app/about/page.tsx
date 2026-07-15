@@ -133,6 +133,24 @@ export default function AboutPage() {
       role: 'Customer Relations Officer',
       image: '/precious.jpeg',
       fallback: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?fit=crop&w=400&h=400&q=80'
+    },
+    {
+      name: 'Oreoluwa Rotimi Kolawole',
+      role: 'Client Education Lead',
+      image: '/oreoluwa.jpeg',
+      fallback: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?fit=crop&w=400&h=400&q=80'
+    },
+    {
+      name: 'Esther Tolulope Akindele',
+      role: 'Admin Department',
+      image: '/esther.jpeg',
+      fallback: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?fit=crop&w=400&h=400&q=80'
+    },
+    {
+      name: 'Thomas Erioluwa Abraham',
+      role: 'Allocation Officer',
+      image: '/thomas.jpeg',
+      fallback: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?fit=crop&w=400&h=400&q=80'
     }
   ]
 

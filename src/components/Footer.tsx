@@ -126,12 +126,12 @@ export default function Footer() {
               <li><Link href="/projects?status=sold" className="hover:text-orange-500 transition-colors">Sold Out</Link></li>
               <li>
                 <a 
-                  href="https://surveyheart.com/form/69e462b8001e39939dc2b237" 
+                  href="https://surveyheart.com/form/6a55732b49d3efd14c713a53" 
                   target="_blank" 
                   rel="noopener noreferrer" 
                   className="hover:text-orange-500 transition-colors"
                 >
-                  Book Inspection
+                  Book A Free Inspection.
                 </a>
               </li>
             </ul>

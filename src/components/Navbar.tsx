@@ -216,11 +216,11 @@ export default function Navbar() {
           </a>
 
           <Link
-            href="https://surveyheart.com/form/69e462b8001e39939dc2b237"
+            href="https://surveyheart.com/form/6a55732b49d3efd14c713a53"
             target="_blank"
             className="bg-orange-600 text-white lg:px-5 lg:py-2.5 px-4 py-2 rounded-full text-sm font-semibold hover:bg-orange-700 transition-colors shadow-lg shadow-orange-600/30 whitespace-nowrap"
           >
-            Book Inspection
+            Book A Free Inspection.
           </Link>
         </nav>
 
@@ -349,12 +349,12 @@ export default function Navbar() {
             </a>
 
             <Link
-              href="https://surveyheart.com/form/69e462b8001e39939dc2b237"
+              href="https://surveyheart.com/form/6a55732b49d3efd14c713a53"
               target="_blank"
               onClick={() => setIsOpen(false)}
               className="bg-orange-600 text-white text-center px-5 py-3 rounded-xl font-semibold hover:bg-orange-700 mt-2"
             >
-              Book Inspection
+              Book A Free Inspection.
             </Link>
           </motion.div>
         )}
